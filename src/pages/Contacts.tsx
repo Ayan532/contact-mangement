@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Contact } from '../types';
 import ContactNotFound from '../components/ContactNotFound';
+import { RootState } from '../redux/store';
 const Contacts = () => {
-    const {contacts}=useSelector(state=>state.contacts)
+    const {contacts}=useSelector((state:RootState)=>state.contacts)
   return (
     <div className="flex justify-center items-center flex-col -z-10">
       <div>

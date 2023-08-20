@@ -16,7 +16,8 @@ const Map = () => {
         setCountriesData(data);
         return data;
     })
-
+  console.log(data);
+  
  
   return (
 

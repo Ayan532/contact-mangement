@@ -12,11 +12,13 @@ import {
   Tooltip,
 } from 'chart.js';
 import Loader from "./Loader";
+import { ChartData } from "../types";
 
 
 const LineGraph = () => {
-  const [chartData, setChartData] = useState<any>([]);
+  const [chartData, setChartData] = useState<ChartData>({ labels: [], datasets: [] });
     const { data } = useQuery(['graphData'], async () => {
+      
         const response = await fetch('https://disease.sh/v3/covid-19/historical/all?lastdays=all');
         const data = await response.json();
         const newChartData = {
@@ -31,8 +33,9 @@ const LineGraph = () => {
               },
             ],
           };
+
     
-          setChartData(newChartData);
+          setChartData(newChartData as ChartData) ;
 
           ChartJS.register(
             CategoryScale,
@@ -45,7 +48,8 @@ const LineGraph = () => {
           );
           return data
       });
-     
+      
+      console.log(data)
       
 
   return (

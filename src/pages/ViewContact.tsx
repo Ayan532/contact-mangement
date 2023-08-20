@@ -2,14 +2,15 @@ import { useDispatch, useSelector } from "react-redux"
 import { deleteContact, getContactById } from "../redux/Slices/contactSlice"
 import {  Link,  useNavigate, useParams } from "react-router-dom"
 import {useEffect} from 'react'
+import { RootState } from "../redux/store"
 
 const ViewContact = () => {
     const dispatch=useDispatch()
     const navigation=useNavigate()
-    const params=useParams()
+    const params=useParams<{ id?: string }>()
 
     
-    const {contact}=useSelector(state=>state.contacts)
+    const {contact}=useSelector((state:RootState)=>state.contacts)
     useEffect(() => {
         if(params.id){
 
@@ -29,34 +30,34 @@ const ViewContact = () => {
      
   return (
     <div className="w-full h-screen flex justify-center items-center">
-        <div className="bg-white w-[70%] md:w-[50%] h-1/2 p-4 shadow-lg rounded-lg flex md:flex-row flex-col justify-around items-center ">
+        <div className="bg-white w-[70%] md:w-[50%] h-max p-4 shadow-lg rounded-lg flex lg:flex-row flex-col justify-around items-center ">
 
           <div className="flex-1 flex justify-center items-center">
-          <img className="w-44 h-44 mb-3 rounded-lg " src={`https://ui-avatars.com/api/?name=${contact[0]?.firstName}+${contact[0]?.lastName}&background=random&rounded=true`} alt="name"/>  
+          <img className="w-44 h-44 mb-3 rounded-lg " src={`https://ui-avatars.com/api/?name=${contact?.firstName}+${contact?.lastName}&background=random&rounded=true`} alt="name"/>  
           </div> 
 
 
           <div className="flex-1 flex flex-col gap-4">
             <div className="flex gap-5 p-2">
               <h1 className="text-xl font-bold">First Name:</h1>
-              <h1 className="text-xl font-semibold text-gray-700">{contact[0]?.firstName}</h1>
+              <h1 className="text-xl font-semibold text-gray-700">{contact?.firstName}</h1>
              </div>
             <div className="flex gap-5 p-2">
               <h1 className="text-xl font-bold">Last Name:</h1>
-              <h1 className="text-xl font-semibold text-gray-700">{contact[0]?.lastName}</h1>
+              <h1 className="text-xl font-semibold text-gray-700">{contact?.lastName}</h1>
              </div>
             <div className="flex gap-5 p-2">
               <h1 className="text-xl font-bold">Mobile:</h1>
-              <h1 className="text-xl font-semibold text-gray-700">{contact[0]?.mobileNumber}</h1>
+              <h1 className="text-xl font-semibold text-gray-700">{contact?.mobileNumber}</h1>
              </div>
             <div className="flex gap-5 p-2">
               <h1 className="text-xl font-bold ">Status</h1>
               <span
           className={`px-2 ml-2 rounded ${
-            contact[0]?.status === 'active' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+            contact?.status === 'active' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
           }`}
         >
-          {contact[0]?.status === 'active' ? 'Active' : 'Inactive'}
+          {contact?.status === 'active' ? 'Active' : 'Inactive'}
         </span>
              </div>
             

@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContact, editContact, getContactById } from '../redux/Slices/contactSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { RootState } from '../redux/store';
+
 const CreateForm= () => {
     //States
     const dispatch=useDispatch()
     const navigation=useNavigate()
-    const {contact}=useSelector(state=>state.contacts)
+    const {contact}=useSelector((state:RootState)=>state.contacts)
     const {search}=useLocation()
     const id=search.split("=")[1]
     const [firstName, setFirstName] = useState('');
@@ -25,10 +27,10 @@ const CreateForm= () => {
 
     useEffect(()=>{
       if(contact && id){
-        setFirstName(contact[0]?.firstName)
-        setLastName(contact[0]?.lastName)
-        setMobileNumber(contact[0]?.mobileNumber)
-        setStatus(contact[0]?.status)
+        setFirstName(contact.firstName)
+        setLastName(contact.lastName )
+        setMobileNumber(contact?.mobileNumber)
+        setStatus(contact?.status )
       }
       
 
@@ -40,7 +42,7 @@ const CreateForm= () => {
        }
       else{       
         const id=uuidv4()
-        console.log(id);
+       
         
         await dispatch(addContact({id,firstName,lastName,mobileNumber,status}))
         setFirstName('');

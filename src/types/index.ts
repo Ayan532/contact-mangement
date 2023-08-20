@@ -3,7 +3,7 @@ export interface Contact {
     firstName: string;
     lastName: string;
     mobileNumber: string;
-    status: 'active' | 'inactive';
+    status: string;
   }
 
   export interface Country{
@@ -17,4 +17,15 @@ export interface Contact {
   recovered: number;
   deaths: number;
 
+  }
+
+ export interface ChartData {
+    labels: string[];
+    datasets: {
+      label: string;
+      data: number[];
+      fill: boolean;
+      borderColor: string;
+      tension: number;
+    }[];
   }
